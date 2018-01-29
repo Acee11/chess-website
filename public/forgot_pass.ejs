@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href='css/VarelaRound.css' rel='stylesheet' type='text/css'>
+
+    <script src="js/code.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="container" id="auth">
+            <!-- FORGOT PASSWORD FORM -->
+            <div class="text-center" style="padding:50px 0">
+                <div class="logo">forgot password</div>
+                <!-- Main Form -->
+                <div class="login-form-1">
+                    <form id="forgot-password-form" class="text-left" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <div class="etc-login-form">
+                            <!-- <p>When you fill in your registered email address, you will be sent instructions on how to reset your password.</p> -->
+                            <p>Sorry, this actually doesn't work.</p>
+                        </div>
+                        <div class="login-form-main-message"></div>
+                        <div class="main-login-form">
+                            <div class="login-group">
+                                <div class="form-group">
+                                    <label for="fp_email" class="sr-only">Email address</label>
+                                    <input type="text" class="form-control" id="fp_email" name="fp_email" placeholder="email address" disabled>
+                                </div>
+                            </div>
+                            <button type="submit" class="login-button" disabled>
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="etc-login-form">
+                            <p>already have an account?
+                                <a href="login">login here</a>
+                            </p>
+                            <p>new user?
+                                <a href="register">create new account</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <!-- end:Main Form -->
+        </div>
+
+    </div>
+
+</body>
+
+</html>

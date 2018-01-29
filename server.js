@@ -2,7 +2,13 @@ const express = require('express'),
     session = require('express-session'),
     RedisStore = require('connect-redis')(session),
     https = require('https'),
-    fs = require('fs')
+    fs = require('fs'),
+    flash = require('connect-flash'),
+    routeIndex = require('./routes/index.js'),
+    routeLogin = require('./routes/login.js'),
+    routeRegister = require('./routes/register.js'),
+    routeForgotPass =require('./routes/forgot_pass'),
+    routeAnonymous = require('./routes/anonymous');
 
 const httpsOptions = {
     pfx: fs.readFileSync('./cert.pfx'),
@@ -14,8 +20,8 @@ const redisOptions = {
     port: 6379,
 };
 
-let app = express();
-let server = https.createServer(httpsOptions, app)
+const app = express();
+const server = https.createServer(httpsOptions, app);
 
 app.use(session({
     store: new RedisStore(redisOptions),
@@ -24,32 +30,26 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         secure: true,
+        maxAge: 60000
     },
 }));
+
+app.use(flash());
 
 app.use(express.urlencoded({
     extended: true
 }));
 
 app.set('view engine', 'ejs');
-app.set('views', './views');
+app.set('views', './public');
 
-app.get('/', (req, res) => {
-    let username = 'World';
-    if(req.session && req.session.username) {
-        username = req.session.username;
-    }
-    res.render('index', {
-        username: username,
-    });
-})
+app.use(express.static(__dirname + '/public'));
 
-app.post('/', (req, res) => {
-    req.session.username = req.body.username;
-    console.log(req.body);
-    res.redirect('/')
-});
-
-
+app.use(routeLogin);
+app.use(routeIndex);
+app.use(routeRegister);
+app.use(routeForgotPass);
+app.use(routeAnonymous);
 
 server.listen(3000);
+// app.listen(3000);
