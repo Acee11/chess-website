@@ -3,12 +3,9 @@ const express = require('express'),
     RedisStore = require('connect-redis')(session),
     https = require('https'),
     fs = require('fs'),
-    flash = require('connect-flash'),
-    routeIndex = require('./routes/index.js'),
-    routeLogin = require('./routes/login.js'),
-    routeRegister = require('./routes/register.js'),
-    routeForgotPass =require('./routes/forgot_pass'),
-    routeAnonymous = require('./routes/anonymous');
+    routeIndex = require('./routes/index'),
+    routeAuth = require('./routes/auth'),
+    routeGame = require('./routes/game');
 
 const httpsOptions = {
     pfx: fs.readFileSync('./cert.pfx'),
@@ -30,11 +27,10 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         secure: true,
-        maxAge: 60000
+        maxAge: 60000 * 60
     },
 }));
 
-app.use(flash());
 
 app.use(express.urlencoded({
     extended: true
@@ -45,11 +41,17 @@ app.set('views', './public');
 
 app.use(express.static(__dirname + '/public'));
 
-app.use(routeLogin);
+app.use(function (err, req, res, next) {
+    if (err.code !== 'EBADCSRFTOKEN') {
+        return next(err);
+    }
+    console.log(err);
+    res.redirect('/');
+});
+
 app.use(routeIndex);
-app.use(routeRegister);
-app.use(routeForgotPass);
-app.use(routeAnonymous);
+app.use(routeAuth);
+app.use(routeGame);
 
 server.listen(3000);
 // app.listen(3000);

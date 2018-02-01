@@ -1,15 +1,121 @@
 body,
 html {
     height: 100%;
-}
-
-.bg {
     /* The image used */
-    background-image: url("./../img/chess-tips.jpg");
+
+    background-image: url("./../img/background.jpg");
     /* Full height */
+
     height: 100%;
     /* Center and scale the image nicely */
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: 'Varela Round';
+}
+
+.ch-button {
+    width: 100%;
+    height: 50px;
+    background: #ffffff;
+    color: #999999;
+    border-radius: 8px;
+    /* padding: 10px 20px; */
+    margin-top: 5px;
+    margin-right: 2px;
+    margin-bottom: 0px;
+    margin-left: 2px;
+}
+
+.ch-button:hover {
+    /* color: rgb(204, 204, 204); */
+    background: rgb(226, 226, 226);
+}
+
+.ch-button:focus {
+    outline: 0;
+}
+
+.ch-div {
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+#game-container {
+    width: 100%;
+    height: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#user-view {
+    float: left;
+    width: 75%;
+    height: 97%;
+    
+    margin-top: 1.5%;
+    margin-right: 1.5%;
+    margin-bottom: 1.5%;
+    margin-left: 1.5%;
+}
+
+#user-interface {
+    float: right;
+    width: 19%;
+    height: 97%;
+    margin-top: 1.5%;
+    margin-right: 1.5%;
+    margin-bottom: 1.5%;
+    margin-left: 1.5%;
+}
+
+#ui-userinfo {
+    height: 100px;
+    width:97%;
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#ui-username {
+    width: 100%;
+    height: 50%;
+    font-weight: bold;
+    font-size: 20px;
+    color: #666666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ui-userrating {
+    width: 100%;
+    height: 50%;
+    font-weight: bold;
+    font-size: 20px;
+    color: #666666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ui-button {
+    height: 65px;
+    width:97%;
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #666666;
+}
+
+.ui-button:focus {
+    outline: 0;
 }

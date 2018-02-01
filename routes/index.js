@@ -1,19 +1,13 @@
-const express = require('express'),
-    csrf = require('csurf');
+const express = require('express');
 
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
     if (req.session.user) {
-        next();
+        res.redirect('/game');;
     } else {
-        res.redirect('/login');
+        res.redirect('/auth');
     }
-});
-
-
-router.get('/', (req, res) => {
-    res.render('index');
 });
 
 module.exports = router;

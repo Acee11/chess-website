@@ -7,58 +7,53 @@ const router = express.Router();
 const csrfProtection = csrf({ cookie: false });
 
 router.get('/anonymous', csrfProtection, (req, res) => {
-    try {
-        res.render('anonymous', {
-            csrfToken: req.csrfToken(),
-            errMsg: req.flash('errMsg'),
-        });
-    } catch (error) {
-        console.log(error);
-        req.flash('errMasg', 'Error, please try again');
-        res.redirect('/anonymous');
-    }
+    res.render('anonymous', {
+        csrfToken: req.csrfToken(),
+    });
 });
 
 router.post('/anonymous', csrfProtection, (req, res, next) => {
+    let msg = '';
     try {
-        let errMsg = '';
         if (!req.body.gs_username) {
-            errMsg = 'Please enter your name';
+            msg = 'Please enter your name';
         } else if (!validator.isAlphanumeric(req.body.gs_username)) {
-            errMsg = 'Wrong type of input';
+            msg = 'Wrong type of input';
         } else if (req.body.gs_username.length < 3) {
-            errMsg = 'Username should be at least 3 characters long';
+            msg = 'Username should be at least 3 characters long';
         } else if (req.body.gs_username.length > 20) {
-            errMsg = 'Username should be at most 20 characters long';
+            msg = 'Username should be at most 20 characters long';
         }
-
-        if(errMsg) {
-            req.flash('errMsg', errMsg);
-            res.redirect('/anonymous');
-            return;
-        }
-
-        next();
     } catch (error) {
-        console.log(error);
-        req.flash('errMasg', 'Error, please try again');
-        res.redirect('/anonymous');
+        msg = 'Error, please try again';
+    } finally {
+        if (msg) {
+            res.json({
+                err: true,
+                msg: msg,
+            });
+        } else {
+            next();
+        }
     }
 });
 
-router.post('/anonymous', csrfProtection, (req, res) => {
+router.post('/anonymous', (req, res) => {
     try {
         req.session.user = {
             guest: true,
-            username: req.body.username,
+            username: req.body.gs_username,
         };
     
-        res.redirect('/');
+        res.json({
+            err: false,
+        });
     } catch (error) {
-        console.log(error);
-        req.flash('errMasg', 'Error, please try again');
-        res.redirect('/anonymous');
+        res.json({
+            err: true,
+            msg: 'Error, please try again'
+        });
     }
-})
+});
 
 module.exports = router;

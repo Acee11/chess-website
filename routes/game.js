@@ -4,10 +4,13 @@ const express = require('express'),
 const router = express.Router();
 const csrfProtection = csrf({ cookie: false });
 
-
-
-router.get('/forgot-password', csrfProtection, (req, res) => {
-    res.render('forgot_pass', {
+router.get('/game', csrfProtection, (req, res) => {
+    if(!req.session.user) {
+        res.redirect('/');
+        return;
+    }
+    res.render('game', {
+        userName: req.session.user.username,
         csrfToken: req.csrfToken(),
     });
 });

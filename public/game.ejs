@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='css/VarelaRound.css' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/mystyles.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="user-view">
+
+        </div>
+        <div id="user-interface">
+            <div class="ch-div" id="ui-userinfo">
+                <div id="ui-username">
+                    Username: <%= userName %>
+                </div>
+                <div id="ui-userrating">
+                    Rating: 1337
+                </div>
+            </div>
+            <div id="ui-buttons">
+                <button id="ui-btn-find" class="ui-button ch-div">
+                    Find a game
+                </button>
+                <button id="ui-btn-stats" class="ui-button ch-div">
+                    Statistics
+                </button>
+                <button id="ui-btn-logout" class="ui-button ch-div">
+                    Logout
+                </button>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            </div>
+        </div>
+    </div>
+    <script src="js/ui.js"></script>
+</body>
+
+</html>
