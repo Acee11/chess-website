@@ -2,7 +2,6 @@ const express = require('express'),
     csrf = require('csurf'),
     { Pool } = require('pg'),
     User = require('./../models/user'),
-    flash = require('connect-flash'),
     validator = require('validator');
 
 const router = express.Router();

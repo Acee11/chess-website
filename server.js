@@ -1,11 +1,14 @@
 const express = require('express'),
-    session = require('express-session'),
-    RedisStore = require('connect-redis')(session),
+    expressSession = require('express-session'),
+    RedisStore = require('connect-redis')(expressSession),
     https = require('https'),
     fs = require('fs'),
     routeIndex = require('./routes/index'),
     routeAuth = require('./routes/auth'),
-    routeGame = require('./routes/game');
+    routeGame = require('./routes/game'),
+    routeApi = require('./routes/api'),
+    iogame = require('./iogame').io,
+    sharedsession = require('express-socket.io-session');
 
 const httpsOptions = {
     pfx: fs.readFileSync('./cert.pfx'),
@@ -19,8 +22,7 @@ const redisOptions = {
 
 const app = express();
 const server = https.createServer(httpsOptions, app);
-
-app.use(session({
+const session = expressSession({
     store: new RedisStore(redisOptions),
     secret: 's3cr3t',
     resave: false,
@@ -29,7 +31,13 @@ app.use(session({
         secure: true,
         maxAge: 60000 * 60
     },
-}));
+});
+
+app.use(session);
+
+iogame.use(sharedsession(session, {
+    autoSave: true
+})); 
 
 
 app.use(express.urlencoded({
@@ -49,9 +57,13 @@ app.use(function (err, req, res, next) {
     res.redirect('/');
 });
 
+
+
 app.use(routeIndex);
 app.use(routeAuth);
 app.use(routeGame);
+app.use(routeApi);
 
+iogame.attach(server);
 server.listen(3000);
 // app.listen(3000);

@@ -14,16 +14,20 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='css/VarelaRound.css' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/mystyles.css">
+    <link rel="stylesheet" type="text/css" href="css/chessboard-0.3.0.min.css">
+    <link rel="stylesheet" type="text/css" href="css/chat.css">
 </head>
 
 <body>
     <div id="game-container">
         <div id="user-view">
-
+            
         </div>
         <div id="user-interface">
             <div class="ch-div" id="ui-userinfo">
@@ -35,8 +39,11 @@
                 </div>
             </div>
             <div id="ui-buttons">
-                <button id="ui-btn-find" class="ui-button ch-div">
-                    Find a game
+                <button id="ui-btn-game" class="ui-button ch-div">
+                    Game
+                </button>
+                <button id="ui-btn-roomlist" class="ui-button ch-div">
+                    Room list
                 </button>
                 <button id="ui-btn-stats" class="ui-button ch-div">
                     Statistics
@@ -49,6 +56,9 @@
         </div>
     </div>
     <script src="js/ui.js"></script>
+    <script src='js/chessboard-0.3.0.min.js'></script>
+    <script src='js/chat.js'></script>
+    
 </body>
 
 </html>

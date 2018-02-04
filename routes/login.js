@@ -1,7 +1,6 @@
 const express = require('express'),
     csrf = require('csurf'),
-    User = require('./../models/user'),
-    flash = require('connect-flash');
+    User = require('./../models/user');
 
 const router = express.Router();
 const csrfProtection = csrf({ cookie: false });

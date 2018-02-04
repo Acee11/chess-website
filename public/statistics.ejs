@@ -1,0 +1,10 @@
+<ul id="games-ul">
+    <% games.forEach((game) => {%>
+        <li id = "games-li">
+            <%= game.white ? game.white.dataValues.username : '---' %> 
+              vs.  
+            <%= game.black ? game.black.dataValues.username : '---' %>
+            winner: <%= game.dataValues.winner %>
+        </li>
+    <% }) %>
+</ul>
