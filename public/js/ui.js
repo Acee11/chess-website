@@ -155,6 +155,7 @@ function loadBoard() {
 
 function loadRooms() {
     $.get('/api/rooms', function(data) {
+        console.log(data);
         $("#room-list").html(data);
     });
 }
@@ -164,7 +165,7 @@ function clearRooms() {
 }
 
 function loadRoomList() {
-    $.get('/roomlist', function (data) {
+    $.get('/api/roomlist', function (data) {
         $("#user-view").html(data);
         loadRooms();
     });
@@ -172,7 +173,7 @@ function loadRoomList() {
 
 function loadGame() {
     
-    $.get('/board', function (datahtml) {
+    $.get('/api/board', function (datahtml) {
         $("#user-view").html(datahtml);
         $.get('/api/position', function(data) {
             cfg.position = data.position || 'start';
@@ -244,7 +245,7 @@ $("#ui-btn-stats").click(function () {
 });
 
 $("#user-view").on('click', '#room-create-btn', function() {
-    $.get('/createroom', function(data) {
+    $.get('/api/createroom', function(data) {
         $("#user-view").html(data);
     });
 });
@@ -292,7 +293,9 @@ $("#user-view").on('click', '#btn-leave-room', function () {
 });
 
 $("#user-view").on('click', '#btn-resign', function () {
-    socket.emit('resign');
+    if (currColor) {
+        socket.emit('resign');
+    }
 });
 
 $(document).ready(function () {

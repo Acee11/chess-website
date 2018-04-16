@@ -15,8 +15,6 @@ router.get('/api/position', (req, res) => {
     let currGame = currRoom.game;
     let userName = req.session.user.username;
     let player = null;
-    console.log(currRoom.white);
-    console.log(currRoom.black);
     if (currRoom.white && currRoom.white.name === userName) {
         player = 'white';
     } else if (currRoom.black && currRoom.black.name === userName) {

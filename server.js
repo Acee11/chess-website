@@ -7,8 +7,8 @@ const express = require('express'),
     routeAuth = require('./routes/auth'),
     routeGame = require('./routes/game'),
     routeApi = require('./routes/api'),
-    iogame = require('./iogame').io,
-    sharedsession = require('express-socket.io-session');
+    sharedsession = require('express-socket.io-session'),
+    iogame = require('./iogame').io;
 
 const httpsOptions = {
     pfx: fs.readFileSync('./cert.pfx'),

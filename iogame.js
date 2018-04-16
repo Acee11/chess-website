@@ -1,9 +1,13 @@
-const io = require('socket.io')(),
-    Chess = require('chess.js').Chess,
+const Chess = require('chess.js').Chess,
     sanitizer = require('sanitizer'),
     User = require('./models/user'),
     Game = require('./models/games');
 
+const ioOptions = {
+    origins: 'https://localhost:3000',
+};
+
+io = require('socket.io')(ioOptions);
 async function afterOver(room, winner) {
     try {
 
@@ -24,18 +28,18 @@ async function afterOver(room, winner) {
     
 }
 
-// TODO use redis??
 let rooms = {};
 
-// TODO add input validation
-
 io.on('connect', (socket) => {
+    if (!socket.handshake.session.user) {
+        return;
+    }
     if (socket.handshake.session.room) {
         socket.join(socket.handshake.session.room);
     }
-    socket.on('disconnect', function () {
-        console.log('user disconnected');
-    });
+    // socket.on('disconnect', function () {
+    //     console.log('user disconnected');
+    // });
 
     socket.on('createRoom', (data) => {
         if (socket.handshake.session.room) {

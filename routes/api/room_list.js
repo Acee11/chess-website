@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/roomlist', (req, res) => {
+router.get('/api/roomlist', (req, res) => {
     res.render('room_list');
 });
 
